@@ -13,9 +13,13 @@ def add_ticker_from_input(ls):
       ls.add(tickerinput)
 
 def add_ticker_from_txt(ls, txt='input.txt'):
+  rowscount = 0
   with open(txt, 'r') as f:
     for row in f:
-      ls.add(row[:-1])
+      ls.add(row[:-1].lower)
+      rowscount += 1
+  separator()
+  print(f'Found {rowscount} ticker(s) in input.txt')
 
 def show_list(ls):
   separator()

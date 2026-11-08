@@ -1,5 +1,5 @@
 def separator():
-  print('-' * 20)
+  print('-' * 30)
 
 def userinput():
   return input('> ').lower()

@@ -1,5 +1,5 @@
 import datetime as dt
-#import yfinance as yf
+import yfinance as yf
 from helpful import *
 from tickers import *
 
@@ -8,7 +8,9 @@ tickers_list = set()
 while True:
   separator()
   print('wha u want to do')    #change
-  print('\t1. Enter data\n\t2. another')
+  print('''\t1. Enter data
+    \t2. print the list
+    \t3.''')
   mainchoice = userinput()
 
   match mainchoice:
@@ -38,5 +40,11 @@ while True:
           add_ticker_from_txt(tickers_list)
           add_ticker_from_input(tickers_list)
 
+#      |\      _,,,---,,_
+#ZZZzz /,`.-'`'    -.  ;-;;,_
+#     |,4-  ) )-,_. ,\ (  `'-'
+#    '---''(_/--'  `-'\_)
+
+    # print the list
     case '2':
-      print('bye')
+      show_list(tickers_list)

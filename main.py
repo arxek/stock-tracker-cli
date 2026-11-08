@@ -20,7 +20,10 @@ while True:
     # enter data
     case '1':
       separator()
-      print('select input:\n\t1.only terminal\n\t2.only txt\n\t3.both')
+      print('''select input:
+        \t1.only terminal
+        \t2.only txt
+        \t3.both''')
       inputchoice = userinput()
       
       match inputchoice:

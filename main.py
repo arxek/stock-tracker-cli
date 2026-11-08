@@ -27,20 +27,16 @@ while True:
 
         # only terminal
         case '1':
-          while True:
-            separator()
-            print(f'enter your data or "stop" ({len(tickers_list)})')
-            tickerinput = userinput()
-
-            if tickerinput in ('q', 'stop'):
-              break
-
-            else:
-              add_ticker_from_input(tickers_list, tickerinput)
+          add_ticker_from_input(tickers_list)
 
         # only txt
         case '2':
-          pass
+          add_ticker_from_txt(tickers_list)
+
+        # both
+        case '3':
+          add_ticker_from_txt(tickers_list)
+          add_ticker_from_input(tickers_list)
 
     case '2':
       print('bye')

@@ -1,3 +1,5 @@
+from yfinance import ticker
+
 from helpful import separator, userinput
 
 def add_ticker_from_input(ls):
@@ -20,6 +22,32 @@ def add_ticker_from_txt(ls, txt='input.txt'):
       rowscount += 1
   separator()
   print(f'Found {rowscount} ticker(s) in input.txt')
+
+# unused
+def show_list_short(ls):
+  separator()
+  tickers_short = ''
+  for i in ls:
+    tickers_short = tickers_short + i.upper() + ' '
+  
+  print('Availabe tickers:', tickers_short)
+
+def remove_ticker(ls):
+  while True:
+    separator()
+    tickerinput = userinput()
+
+    if tickerinput in ('q', 'stop'):
+      break
+    
+    else:
+      try:
+        ls.remove(tickerinput)
+        print(f'Ticker "{tickerinput.upper()}" was successfuly removed')
+      
+      except KeyError:
+        print(f'Ticker "{tickerinput.upper()}" was not found')
+
 
 def show_list(ls):
   separator()

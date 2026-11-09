@@ -2,4 +2,4 @@ def separator():
   print('-' * 30)
 
 def userinput():
-  return input('> ').lower()
+  return input('> ').strip().lower()

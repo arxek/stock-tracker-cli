@@ -43,10 +43,10 @@ def remove_ticker(ls):
     else:
       try:
         ls.remove(tickerinput)
-        print(f'Ticker "{tickerinput.upper()}" was successfuly removed')
+        print(f'Ticker "{tickerinput.upper()}" was successfuly removed ({len(ls)} left)')
       
       except KeyError:
-        print(f'Ticker "{tickerinput.upper()}" was not found')
+        print(f'Ticker "{tickerinput.upper()}" was not found ({len(ls)} left)')
 
 
 def show_list(ls):

@@ -1,4 +1,4 @@
-from yfinance import ticker
+#from yfinance import ticker
 
 from helpful import separator, userinput
 

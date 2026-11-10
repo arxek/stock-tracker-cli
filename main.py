@@ -1,5 +1,5 @@
 import datetime as dt
-import yfinance as yf
+#import yfinance as yf
 from helpful import *
 from tickers import *
 

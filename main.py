@@ -1,35 +1,35 @@
 import datetime as dt
-#import yfinance as yf
+import requests
 from helpful import *
 from tickers import *
 
-tickers_list = set()
+tickers_list = []
 
 while True:
   separator()
-  print('wha u want to do')    #change
+  print('What do you want to do')    #change
   print('''\t1. Enter data
-    \t2. Remove tickers
-    \t3. print the list
-    \t4.''')
+  \t2. Remove tickers
+  \t3. print the list
+  \t4.''')
   mainchoice = userinput()
 
   match mainchoice:
-    case 'q' | 'stop':
+    case 'Q' | 'STOP':
       break
 
     # enter data
     case '1':
       separator()
-      print('''select input:
-        \t1.only terminal
-        \t2.only txt
-        \t3.both''')
+      print('''select input (or "stop"):
+      \t1.only terminal
+      \t2.only txt
+      \t3.both''')
       inputchoice = userinput()
-      
+
       match inputchoice:
-        case 'q' | 'stop':
-          pass
+        case 'Q' | 'STOP':
+          break
 
         # only terminal
         case '1':
@@ -49,6 +49,7 @@ while True:
 #     |,4-  ) )-,_. ,\ (  `'-'
 #    '---''(_/--'  `-'\_)
 
+    # remove ticker
     case '2':
       show_list(tickers_list)
       remove_ticker(tickers_list)

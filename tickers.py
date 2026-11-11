@@ -8,22 +8,28 @@ def add_ticker_from_input(ls):
     print(f'enter your data or "stop" ({len(ls)})')
     tickerinput = userinput()
 
-    if tickerinput in ('q', 'stop'):
+    if tickerinput in ('Q', 'STOP'):
       break
+    
+    elif tickerinput in ls:
+      print(f'Ticker {tickerinput.upper()} already exists.')
 
     else:
-      ls.add(tickerinput)
+      ls.append(tickerinput)
+
 
 def add_ticker_from_txt(ls, txt='input.txt'):
   rowscount = 0
   with open(txt, 'r') as f:
     for row in f:
-      ls.add(row[:-1].lower())
-      rowscount += 1
+      if not(row.upper() in ls):
+        ls.append(row[:-1].upper())
+        rowscount += 1
   separator()
-  print(f'Found {rowscount} ticker(s) in input.txt')
+  print(f'Found {rowscount} unique ticker(s) in input.txt')
 
 # unused
+'''
 def show_list_short(ls):
   separator()
   tickers_short = ''
@@ -31,26 +37,27 @@ def show_list_short(ls):
     tickers_short = tickers_short + i.upper() + ' '
   
   print('Availabe tickers:', tickers_short)
+'''
 
 def remove_ticker(ls):
   while True:
     separator()
     tickerinput = userinput()
 
-    if tickerinput in ('q', 'stop'):
+    if tickerinput in ('Q', 'STOP'):
       break
     
     else:
       try:
         ls.remove(tickerinput)
-        print(f'Ticker "{tickerinput.upper()}" was successfuly removed ({len(ls)} left)')
+        print(f'Ticker "{tickerinput}" was successfuly removed ({len(ls)} left)')
       
-      except KeyError:
-        print(f'Ticker "{tickerinput.upper()}" was not found ({len(ls)} left)')
+      except ValueError:
+        print(f'Ticker "{tickerinput}" was not found ({len(ls)} left)')
 
 
 def show_list(ls):
   separator()
   print('Available tickers:')
   for i in ls:
-    print('\t', i.upper())
+    print('\t', i)

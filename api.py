@@ -32,4 +32,3 @@ def get_history(symbol, from_date, to_date):
 
   return data
 
-print(get_history('AAPL', '2026-10-31', '2026-11-05'))

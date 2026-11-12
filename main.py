@@ -2,8 +2,9 @@ import datetime as dt
 import requests
 from helpful import *
 from tickers import *
+from api import *
 
-tickers_list = []
+tickers_list = [] 
 
 while True:
   separator()
@@ -11,7 +12,7 @@ while True:
   print('''\t1. Enter data
   \t2. Remove tickers
   \t3. print the list
-  \t4.''')
+  \t4. test''')
   mainchoice = userinput()
 
   match mainchoice:
@@ -57,3 +58,6 @@ while True:
     # print the list
     case '3':
       show_list(tickers_list)
+
+    case '4':
+      print(get_profile('AAPL')['country'])

@@ -7,8 +7,18 @@ BASE_URL = 'https://financialmodelingprep.com/stable'
 # data = response.json()[0]
 
 def load_api_key():
-  with open('API_KEY.txt', 'r', encoding='utf-8') as f:
-    return f.readline().strip()
+  try:
+    with open('API_KEY.txt', 'r', encoding='utf-8') as f:
+      return f.readline().strip()
+  except FileNotFoundError:
+    return '0'
+
+def check_api_key():
+  key = load_api_key()
+  if key != '0' and key != '':
+    return 1 #True
+  else:
+    return False
 
 def get_profile(symbol):
   response = requests.get(f'{BASE_URL}/profile', params={'symbol': symbol, 'apikey': load_api_key()}, timeout=10)

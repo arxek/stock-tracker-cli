@@ -16,6 +16,10 @@ while True:
   \t5. Calculate average price
   \t6. Reports
   \t7. Quit''')
+
+  if not check_api_key():#not check_api_key():
+    separator()
+    print('! API key not found\n! Some functions might not work')
   mainchoice = userinput()
 
   match mainchoice:
@@ -61,6 +65,13 @@ while True:
     # print the list
     case '3':
       show_list(tickers_list)
-
+    
+    # update prices and sectors
     case '4':
-      print(get_profile('AAPL')['country'])
+      separator()
+      print('''Select or "stop"
+      \t1. Current prices + sectors
+      \t2. Week-ago prices + sectors
+      \t3. Both''')
+      inputchoice = userinput()
+

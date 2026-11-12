@@ -1,4 +1,5 @@
 .DS_Store
+API_KEY.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -220,4 +221,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-/API_KEY.txt

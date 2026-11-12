@@ -11,12 +11,15 @@ while True:
   print('What do you want to do')    #change
   print('''\t1. Enter data
   \t2. Remove tickers
-  \t3. print the list
-  \t4. test''')
+  \t3. Print the list
+  \t4. Update prices and sectors
+  \t5. Calculate average price
+  \t6. Reports
+  \t7. Quit''')
   mainchoice = userinput()
 
   match mainchoice:
-    case 'Q' | 'STOP':
+    case '0' | '7':
       break
 
     # enter data
@@ -29,8 +32,8 @@ while True:
       inputchoice = userinput()
 
       match inputchoice:
-        case 'Q' | 'STOP':
-          break
+        case '0':
+          pass
 
         # only terminal
         case '1':

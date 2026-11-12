@@ -8,7 +8,7 @@ def add_ticker_from_input(ls):
     print(f'enter your data or "stop" ({len(ls)})')
     tickerinput = userinput()
 
-    if tickerinput in ('Q', 'STOP'):
+    if tickerinput == '0':
       break
     
     elif tickerinput in ls:
@@ -44,7 +44,7 @@ def remove_ticker(ls):
     separator()
     tickerinput = userinput()
 
-    if tickerinput in ('Q', 'STOP'):
+    if tickerinput == '0':
       break
     
     else:

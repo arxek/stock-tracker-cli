@@ -1,6 +1,5 @@
-#from yfinance import ticker
-
 from helpful import separator, userinput
+
 
 def add_ticker_from_input(ls):
   while True:
@@ -11,6 +10,9 @@ def add_ticker_from_input(ls):
     if tickerinput == '0':
       break
     
+    elif not tickerinput:
+      continue
+
     elif tickerinput in ls:
       print(f'Ticker {tickerinput.upper()} already exists.')
 
@@ -20,13 +22,18 @@ def add_ticker_from_input(ls):
 
 def add_ticker_from_txt(ls, txt='input.txt'):
   rowscount = 0
-  with open(txt, 'r') as f:
-    for row in f:
-      if not(row.upper() in ls):
-        ls.append(row[:-1].upper())
-        rowscount += 1
   separator()
-  print(f'Found {rowscount} unique ticker(s) in input.txt')
+  try:
+    with open(txt, 'r') as f:
+      for row in f:
+        t = row.strip().upper()
+        if t and not (t in ls):
+          ls.append(t)
+          rowscount += 1
+    print(f'Found {rowscount} unique ticker(s) in input.txt')
+
+  except FileNotFoundError:
+    print('File "input.txt" not found')
 
 # unused
 '''

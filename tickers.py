@@ -63,8 +63,9 @@ def remove_ticker(ls):
         print(f'Ticker "{tickerinput}" was not found ({len(ls)} left)')
 
 
-def show_list(ls):
-  separator()
-  print('Available tickers:')
+def show_list(ls, extra=True):
+  if extra:
+    separator()
+    print('Available tickers:')
   for i in ls:
     print('\t', i)

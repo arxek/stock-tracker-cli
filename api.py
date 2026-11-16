@@ -6,6 +6,9 @@ BASE_URL = 'https://financialmodelingprep.com/stable'
 # response = requests.get(url, params={'symbol': symbol, 'apikey': key}, timeout=10)
 # data = response.json()[0]
 
+class ApiKeyError(Exception):
+  'API key problem'
+
 def load_api_key():
   try:
     with open('API_KEY.txt', 'r', encoding='utf-8') as f:
@@ -15,10 +18,24 @@ def load_api_key():
 
 def check_api_key():
   key = load_api_key()
-  if key != '0' and key != '':
-    return 1 #True
+  if key in ('0', ''):
+    return 'ApiKeyNotFound'
+  
   else:
-    return False
+    try:
+      response = requests.get(f'{BASE_URL}/profile', params={'symbol': 'AAPL', 'apikey': key}, timeout=10)
+      response.raise_for_status()
+    
+    # Internet issues
+    except (ConnectionError, requests.Timeout, TimeoutError, requests.RequestException):
+      return 'NoConnection'
+
+    else:
+      if not isinstance(response.json(), list):
+        return 'ApiKeyWrong'
+      else:
+        return '1' #True
+
 
 def get_profile(symbol):
   response = requests.get(f'{BASE_URL}/profile', params={'symbol': symbol, 'apikey': load_api_key()}, timeout=10)

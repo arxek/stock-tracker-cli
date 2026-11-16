@@ -1,32 +1,33 @@
 import datetime as dt
-import requests
-from helpful import *
-from tickers import *
-from api import *
 
-tickers_list = [] 
+import requests
+
+from api import *
+from helpful import *
+from stock import Stock
+from tickers import *
+from reports import *
+
+tickers_list = []
+stocks_list = []
+working_api = check_api_key()
+
+current_prices_report = []
+week_prices_report = []
+
+today_date = dt.date.today()
+week_ago_date = today_date - dt.timedelta(days=7)
 
 while True:
-  separator()
-  print('What do you want to do')    #change
-  print('''\t1. Enter data
-  \t2. Remove tickers
-  \t3. Print the list
-  \t4. Update prices and sectors
-  \t5. Calculate average price
-  \t6. Reports
-  \t7. Quit''')
-
-  if not check_api_key():#not check_api_key():
-    separator()
-    print('! API key not found\n! Some functions might not work')
+  main_menu(working_api)
   mainchoice = userinput()
 
   match mainchoice:
+    # 0. close everything
     case '0' | '7':
       break
 
-    # enter data
+    # 1. enter data
     case '1':
       separator()
       print('''select input (or "stop"):
@@ -36,18 +37,19 @@ while True:
       inputchoice = userinput()
 
       match inputchoice:
+        # 1.0. back to menu
         case '0':
           pass
 
-        # only terminal
+        # 1.1. only terminal
         case '1':
           add_ticker_from_input(tickers_list)
 
-        # only txt
+        # 1.2. only txt
         case '2':
           add_ticker_from_txt(tickers_list)
 
-        # both
+        # 1.3. both
         case '3':
           add_ticker_from_txt(tickers_list)
           add_ticker_from_input(tickers_list)
@@ -57,21 +59,79 @@ while True:
 #     |,4-  ) )-,_. ,\ (  `'-'
 #    '---''(_/--'  `-'\_)
 
-    # remove ticker
+    # 2. remove ticker
     case '2':
       show_list(tickers_list)
       remove_ticker(tickers_list)
 
-    # print the list
+    # 3. print the list
     case '3':
       show_list(tickers_list)
     
-    # update prices and sectors
-    case '4':
+    # 4. update prices and sectors
+    # only with working api
+    case '4' if working_api == '1':
       separator()
       print('''Select or "stop"
       \t1. Current prices + sectors
       \t2. Week-ago prices + sectors
       \t3. Both''')
+      
+      # update stocks list
+      stocks_list = [Stock(ticker) for ticker in tickers_list] 
+      
       inputchoice = userinput()
 
+      separator()
+
+      match inputchoice:
+        # 4.0. back to menu
+        case '0':
+          pass
+
+        # 4.1. current prices
+        case '1':
+
+          make_report(stocks_list, current_prices_report, False, True)
+
+        #4.2 week-ago prices
+        case '2':
+          if week_prices_report:
+            for row in week_prices_report:
+              print(row)
+
+          else:
+            for stock in stocks_list:
+              if stock.update_week():
+                new_stock_line = stock.line(True)
+                print(new_stock_line)
+                week_prices_report.append(new_stock_line)
+
+        #4.3. both
+        case '3':
+          print()
+
+    # calculate average price
+    # only with working api
+    case '5':
+      separator()
+      print('''Calculate avegare price or "stop"
+      \t1. Current prices
+      \t2. Week-ago prices''')
+      
+      # update stocks list
+      stocks_list = [Stock(ticker) for ticker in tickers_list]
+      
+      inputchoice = userinput()
+
+      match inputchoice:
+      # 5.0. back to menu
+        case '0':
+          pass
+
+        # avg current prices
+        case '1':
+          print('')
+          avg_current
+
+        

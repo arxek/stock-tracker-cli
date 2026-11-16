@@ -39,8 +39,8 @@ class Stock:
   @safe_api_call
   def update_week(self):
     target = dt.date.today() - dt.timedelta(days=7)
-    if self.sector is None:
-      sector = self.update_current()
+    if self.sector is None and not self.update_current():
+      return False
 
     start = target - dt.timedelta(days=5)
     history = get_history(self.ticker, start.isoformat(), target.isoformat())
@@ -57,5 +57,7 @@ class Stock:
 
   def line(self, week=False):
     price = self.price_week if week else self.price_now
-    return f'{self.ticker} ({self.sector}) -> {price:.2f} USD'
-
+    try:
+      return f'{self.ticker} ({self.sector}) -> {price:.2f} USD'
+    except TypeError:
+      pass

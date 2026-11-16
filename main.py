@@ -10,7 +10,8 @@ from reports import *
 
 tickers_list = []
 stocks_list = []
-working_api = check_api_key()
+#working_api = check_api_key()
+working_api = '1'
 
 current_prices_report = []
 week_prices_report = []
@@ -91,47 +92,24 @@ while True:
 
         # 4.1. current prices
         case '1':
-
-          make_report(stocks_list, current_prices_report, False, True)
+          make_report(stocks_list, current_prices_report, today_date, False)
 
         #4.2 week-ago prices
         case '2':
-          if week_prices_report:
-            for row in week_prices_report:
-              print(row)
-
-          else:
-            for stock in stocks_list:
-              if stock.update_week():
-                new_stock_line = stock.line(True)
-                print(new_stock_line)
-                week_prices_report.append(new_stock_line)
+          make_report(stocks_list, week_prices_report, week_ago_date, True)
 
         #4.3. both
         case '3':
-          print()
+          make_report(stocks_list, current_prices_report, today_date, False)
+          make_report(stocks_list, week_prices_report, week_ago_date, True)
 
     # calculate average price
     # only with working api
     case '5':
-      separator()
-      print('''Calculate avegare price or "stop"
-      \t1. Current prices
-      \t2. Week-ago prices''')
-      
       # update stocks list
       stocks_list = [Stock(ticker) for ticker in tickers_list]
       
-      inputchoice = userinput()
-
-      match inputchoice:
-      # 5.0. back to menu
-        case '0':
-          pass
-
-        # avg current prices
-        case '1':
-          print('')
-          avg_current
+      # avg current prices
+      avg_price(stocks_list, tickers_list, today_date)
 
         

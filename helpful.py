@@ -10,7 +10,7 @@ def userinput():
 
 def main_menu(working_api):
   separator()
-  print('What do you want to do')    #change
+  print('Select your action')
   if working_api == '1':
     print('''\t1. Enter data
     \t2. Remove tickers

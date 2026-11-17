@@ -1,25 +1,31 @@
-import datetime as dt
 
-import requests
+
+
+
+
+import datetime as dt
 
 from api import *
 from helpful import *
+from reports import *
 from stock import Stock
 from tickers import *
-from reports import *
 
 tickers_list = []
 stocks_list = []
-#working_api = check_api_key()
-working_api = '1'
+working_api = check_api_key()
+#working_api = '1'
 
 current_prices_report = []
 week_prices_report = []
 
 today_date = dt.date.today()
 week_ago_date = today_date - dt.timedelta(days=7)
+today_date = today_date.strftime('%d.%m.%Y')
+week_ago_date = week_ago_date.strftime('%d.%m.%Y')
 
 while True:
+
   main_menu(working_api)
   mainchoice = userinput()
 
@@ -55,6 +61,9 @@ while True:
           add_ticker_from_txt(tickers_list)
           add_ticker_from_input(tickers_list)
 
+      # update stocks list
+      stocks_list = [Stock(ticker) for ticker in tickers_list] 
+
 #      |\      _,,,---,,_
 #ZZZzz /,`.-'`'    -.  ;-;;,_
 #     |,4-  ) )-,_. ,\ (  `'-'
@@ -64,6 +73,9 @@ while True:
     case '2':
       show_list(tickers_list)
       remove_ticker(tickers_list)
+
+      # update stocks list
+      stocks_list = [Stock(ticker) for ticker in tickers_list]
 
     # 3. print the list
     case '3':
@@ -77,9 +89,6 @@ while True:
       \t1. Current prices + sectors
       \t2. Week-ago prices + sectors
       \t3. Both''')
-      
-      # update stocks list
-      stocks_list = [Stock(ticker) for ticker in tickers_list] 
       
       inputchoice = userinput()
 
@@ -106,10 +115,57 @@ while True:
     # calculate average price
     # only with working api
     case '5':
-      # update stocks list
-      stocks_list = [Stock(ticker) for ticker in tickers_list]
-      
-      # avg current prices
       avg_price(stocks_list, tickers_list, today_date)
 
-        
+    # reports
+    case '6':
+      separator()
+      print('Select or "stop"')
+      print('''\t1. Save current report\n\t   to output.txt
+      \t2. Save week-ago report\n\t   to output2.txt
+      \t3. Save both
+      \t4. Print current report
+      \t5. Print week-ago report''')
+
+      inputchoice = userinput()
+
+      match inputchoice:
+        # 6.0. back to menu
+        case '0':
+          pass
+
+        # 6.1. current price report
+        case '1':
+          save_report(stocks_list, current_prices_report, today_date, 'output.txt', False)
+
+        # 6.2. week-ago price report
+        case '2':
+          save_report(stocks_list, week_prices_report, week_ago_date, 'output2.txt', True)
+
+        # 6.3. both report
+        case '3':
+          save_report(stocks_list, current_prices_report, today_date, 'output.txt', False)
+          save_report(stocks_list, week_prices_report, week_ago_date, 'output2.txt', True)
+
+        # 6.4. print current
+        case '4':
+          separator()
+          if current_prices_report:
+            for i in current_prices_report:
+              print(i)
+
+          else:
+            print('No report found, update first')
+
+        # 6.5. print week-ago
+        case '5':
+          separator()
+          if week_prices_report:
+            for i in week_prices_report:
+              print(i)
+
+          else:
+            print('No report found, update first')
+
+
+

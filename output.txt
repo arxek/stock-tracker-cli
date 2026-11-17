@@ -1,4 +1,2 @@
 Stocks prices (current) - 17.11.2026
-NVDA (Technology) -> 155.46 USD
 AAPL (Technology) -> 351.91 USD
-MSFT (Technology) -> 506.24 USD

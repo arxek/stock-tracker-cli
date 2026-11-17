@@ -1,4 +1,4 @@
-def separator(): print('-' * 36)
+def separator(): print('-' * 37)
 
 def userinput():
   stop_words = ('q', 'stop', 'quit', ':q', '0', 'back', 'return', 'exit')

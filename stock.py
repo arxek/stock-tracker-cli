@@ -8,8 +8,8 @@ def safe_api_call(func):
   @wraps(func)
   def wrapper(self, *args, **kwargs):
     try:
-      func(self, *args, **kwargs)
-      return True
+      result = func(self, *args, **kwargs)
+      return result is not False
     except ApiKeyError:
       raise
     except Exception:

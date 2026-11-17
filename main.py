@@ -61,8 +61,10 @@ while True:
           add_ticker_from_txt(tickers_list)
           add_ticker_from_input(tickers_list)
 
-      # update stocks list
-      stocks_list = [Stock(ticker) for ticker in tickers_list] 
+      # update stocks list and clear reports
+      stocks_list = [Stock(ticker) for ticker in tickers_list]
+      current_prices_report.clear()
+      week_prices_report.clear()
 
 #      |\      _,,,---,,_
 #ZZZzz /,`.-'`'    -.  ;-;;,_
@@ -74,8 +76,10 @@ while True:
       show_list(tickers_list)
       remove_ticker(tickers_list)
 
-      # update stocks list
+      # update stocks list and clear reports
       stocks_list = [Stock(ticker) for ticker in tickers_list]
+      current_prices_report.clear()
+      week_prices_report.clear()
 
     # 3. print the list
     case '3':
@@ -114,11 +118,11 @@ while True:
 
     # calculate average price
     # only with working api
-    case '5':
+    case '5' if working_api == '1':
       avg_price(stocks_list, tickers_list, today_date)
 
     # reports
-    case '6':
+    case '6' if working_api == '1':
       separator()
       print('Select or "stop"')
       print('''\t1. Save current report\n\t   to output.txt

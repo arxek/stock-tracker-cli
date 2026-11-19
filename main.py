@@ -37,10 +37,10 @@ while True:
     # 1. enter data
     case '1':
       separator()
-      print('''select input (or "stop"):
-      \t1.only terminal
-      \t2.only txt
-      \t3.both''')
+      print('''Select input (or "stop"):
+      \t1. Only terminal
+      \t2. Only txt
+      \t3. Both''')
       inputchoice = userinput()
 
       match inputchoice:

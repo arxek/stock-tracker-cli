@@ -1,7 +1,7 @@
 import datetime as dt
 from functools import wraps
 
-from api import ApiKeyError, get_history, get_profile
+from api import get_history, get_profile
 
 
 def safe_api_call(func):
@@ -10,8 +10,6 @@ def safe_api_call(func):
     try:
       result = func(self, *args, **kwargs)
       return result is not False
-    except ApiKeyError:
-      raise
     except Exception:
       print(f'Wrong ticker or another issue with\n"{self.ticker}". Ticker skipped.')
       return False

@@ -13,7 +13,7 @@ def safe_api_call(func):
     except ApiKeyError:
       raise
     except Exception:
-      print(f'Wrong ticker or another issue with "{self.ticker}". Ticker skipped.')
+      print(f'Wrong ticker or another issue with\n"{self.ticker}". Ticker skipped.')
       return False
   
   return wrapper

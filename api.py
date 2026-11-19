@@ -1,5 +1,4 @@
 import requests
-import datetime as dt
 
 BASE_URL = 'https://financialmodelingprep.com/stable'
 
@@ -20,21 +19,29 @@ def check_api_key():
   key = load_api_key()
   if key in ('0', ''):
     return 'ApiKeyNotFound'
-  
-  else:
-    try:
-      response = requests.get(f'{BASE_URL}/profile', params={'symbol': 'AAPL', 'apikey': key}, timeout=10)
-      response.raise_for_status()
-    
-    # Internet issues
-    except (ConnectionError, requests.Timeout, TimeoutError, requests.RequestException):
-      return 'NoConnection'
 
-    else:
-      if not isinstance(response.json(), list):
-        return 'ApiKeyWrong'
-      else:
-        return '1' #True
+  try:
+    response = requests.get(f'{BASE_URL}/profile', params={'symbol': 'AAPL', 'apikey': key}, timeout=10)
+    response.raise_for_status()
+
+  # wrong API key
+  except requests.HTTPError as error:
+    if error.response is not None and error.response.status_code in (401, 403):
+      return 'ApiKeyWrong'
+
+  # Internet issues
+  except (requests.ConnectionError, requests.Timeout, requests.RequestException):
+    return 'NoConnection'
+
+  try:
+    data = response.json()
+  except requests.exceptions.JSONDecodeError:
+    return 'ApiKeyWrong'
+
+  if not isinstance(data, list):
+    return 'ApiKeyWrong'
+  
+  return '1' #True
 
 
 def get_profile(symbol):

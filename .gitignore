@@ -1,6 +1,7 @@
 .DS_Store
 API_KEY.txt
 playground.py
+.imgs
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

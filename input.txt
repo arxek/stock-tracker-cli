@@ -1,3 +1,4 @@
 nvda
-aapL
-mSFt
+amzn
+aapl
+msft

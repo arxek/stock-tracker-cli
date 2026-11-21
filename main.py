@@ -1,7 +1,4 @@
-
-
-
-
+# python 3.10
 
 import datetime as dt
 

@@ -1,2 +1,7 @@
-Stocks prices (current) - 17.11.2026
-AAPL (Technology) -> 351.91 USD
+Stocks prices (current) - 21.11.2026
+NVDA (Technology) -> 125.53 USD
+AAPL (Technology) -> 342.56 USD
+MSFT (Technology) -> 484.52 USD
+AMZN (Consumer Cyclical) -> 246.82 USD
+GOOGL (Communication Services) -> 265.29 USD
+ANT (Technology) -> 88.91 USD

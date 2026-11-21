@@ -1,4 +1,6 @@
-Stocks prices (week-ago) - 10.11.2026
-NVDA (Technology) -> 168.89 USD
-AAPL (Technology) -> 348.51 USD
-MSFT (Technology) -> 533.16 USD
+Stocks prices (week-ago) - 14.11.2026
+NVDA (Technology) -> 162.85 USD
+AAPL (Technology) -> 356.27 USD
+MSFT (Technology) -> 523.88 USD
+AMZN (Consumer Cyclical) -> 266.66 USD
+GOOGL (Communication Services) -> 295.77 USD
